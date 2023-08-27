@@ -55,5 +55,15 @@ public class EncuestaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateEncuesta(@PathVariable Long id,@RequestBody)
+    public ResponseEntity<?> updateEncuesta(@PathVariable Long id,@RequestBody Encuesta encuesta){
+        encuesta.setId(id);
+        Encuesta e = encuestaRepository.save(encuesta);
+        return new ResponseEntity<>(e, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteEncuesta(@PathVariable Long id) {
+        encuestaRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
